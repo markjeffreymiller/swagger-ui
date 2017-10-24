@@ -57,9 +57,7 @@ export default class ResponseBody extends React.Component {
       let contentLength = headers["content-length"] || headers["Content-Length"]
       if ( !(+contentLength) ) return null
 
-      const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent)
-
-      if (!isSafari && "Blob" in window) {
+      if ("Blob" in window) {
         let type = contentType || "text/html"
         let blob = (content instanceof Blob) ? content : new Blob([content], {type: type})
         let href = window.URL.createObjectURL(blob)
